@@ -1,0 +1,177 @@
+.bank-transfer-container {
+  max-width: 700px;
+  margin: auto;
+  padding: 2.5rem;
+  background: linear-gradient(to bottom right, #ffffff, #f0f4ff);
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  margin-top: 3rem;
+}
+
+h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1.2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+  color: #555;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 0.75rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background-color: #f7f9fc;
+}
+
+.account-balance,
+.balance-hint {
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.transfer-button {
+  background-color: #007bff;
+  color: white;
+  padding: 0.9rem;
+  width: 100%;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.transfer-button:hover {
+  background-color: #0056b3;
+}
+
+.add-account-button {
+  background-color: #6c757d;
+  color: #fff;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  margin-top: 1rem;
+  width: 100%;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.add-account-button.secondary {
+  background-color: #e4e4e4;
+  color: #444;
+}
+
+.no-accounts {
+  text-align: center;
+  padding: 2rem;
+}
+
+.add-account-form {
+  background-color: #f9f9f9;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.save-button,
+.cancel-button {
+  padding: 0.75rem 1.2rem;
+  border-radius: 0.75rem;
+  font-weight: bold;
+  border: none;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.save-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.cancel-button {
+  background-color: #ddd;
+  color: #444;
+}
+
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.spinner {
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid #fff;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.balance-check-section,
+.transfer-section {
+  background-color: #f9f9ff;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.check-balance-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.check-balance-btn:hover {
+  background-color: #0056b3;
+}
+
+.account-balance-highlight {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #222;
+  background-color: #e3f2fd;
+  padding: 1rem;
+  border-left: 4px solid #1976d2;
+  border-radius: 8px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

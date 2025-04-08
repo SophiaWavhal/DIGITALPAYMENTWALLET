@@ -1,0 +1,176 @@
+/* Fullscreen background with soft gradient */
+.login-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  padding: 1rem;
+}
+
+/* Glass effect login card */
+.glass-card {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 2.8rem 2.2rem;
+  color: #ffffff;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.1);
+  transition: transform 0.3s ease;
+  animation: popUp 0.6s ease;
+}
+
+.glass-card:hover {
+  transform: scale(1.01);
+}
+
+@keyframes popUp {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.glass-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #00f0ff;
+  text-align: center;
+  margin-bottom: 0.3rem;
+}
+
+.glass-subtitle {
+  font-size: 0.95rem;
+  color: #b2bec3;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Form Input Styling */
+.glass-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.glass-input-group {
+  position: relative;
+  margin-bottom: 1.6rem;
+}
+
+.glass-input-group input {
+  width: 100%;
+  padding: 1rem 0.75rem;
+  border: 1px solid #7f8fa6;
+  background: transparent;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.glass-input-group input:focus {
+  border-color: #00f0ff;
+  outline: none;
+  box-shadow: 0 0 8px #00f0ff88;
+}
+
+.glass-input-group label {
+  position: absolute;
+  top: 50%;
+  left: 0.75rem;
+  transform: translateY(-50%);
+  color: #bdc3c7;
+  pointer-events: none;
+  transition: 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.glass-input-group input:focus + label,
+.glass-input-group input:not(:placeholder-shown) + label {
+  top: -10px;
+  font-size: 0.75rem;
+  background: #2c5364;
+  padding: 0 0.3rem;
+  color: #00f0ff;
+  border-radius: 4px;
+}
+
+/* Login button */
+.glass-button {
+  padding: 1rem;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #00f0ff, #9b59b6);
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.glass-button:hover {
+  background: linear-gradient(135deg, #00d4ff, #8e44ad);
+  transform: scale(1.02);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+}
+
+.glass-button:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
+
+/* Footer */
+.glass-footer {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #dcdde1;
+}
+
+.glass-footer a {
+  color: #00f0ff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.glass-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Error */
+.glass-error {
+  background: rgba(255, 0, 0, 0.08);
+  border: 1px solid #ff6b6b;
+  color: #ff7675;
+  padding: 0.9rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Spinner */
+.spinner {
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid #00f0ff;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 1s linear infinite;
+  margin-right: 10px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0); }
+  100% { transform: rotate(360deg); }
+}
