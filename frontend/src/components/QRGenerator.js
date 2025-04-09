@@ -3,7 +3,7 @@ import { QRCodeCanvas } from 'qrcode.react';
 import '../styles/QRGenerator.css';
 
 const QRGenerator = () => {
-  const [qrValue, setQrValue] = useState('https://instawallet.com/pay/yourusername');
+  const [qrValue, setQrValue] = useState('https://easypay.com/pay/yourusername');
   const [size, setSize] = useState(256);
   const [bgColor, setBgColor] = useState('#ffffff');
   const [fgColor, setFgColor] = useState('#000000');
@@ -16,7 +16,7 @@ const QRGenerator = () => {
       .replace("image/png", "image/octet-stream");
     let downloadLink = document.createElement("a");
     downloadLink.href = pngUrl;
-    downloadLink.download = "instawallet-qr.png";
+    downloadLink.download = "easypay-qr.png";
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
@@ -116,7 +116,7 @@ const QRGenerator = () => {
               checked={includeLogo}
               onChange={(e) => setIncludeLogo(e.target.checked)}
             />
-            <label htmlFor="includeLogo">Include InstaWallet Logo</label>
+            <label htmlFor="includeLogo">Include EasyPay Logo</label>
           </div>
         </div>
       </div>
