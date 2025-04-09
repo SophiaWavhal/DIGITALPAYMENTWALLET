@@ -10,13 +10,13 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
-// Middleware setup
+
 app.use(cors({
   origin: 'http://localhost:3000',
   credentials: true
 }));
 app.use(cookieParser());
-app.use(express.json()); // This replaces body-parser.json()
+app.use(express.json()); 
 
 mongoose.connect('mongodb+srv://sophiawavhal170404:sophi2025@cluster0.vlnnkjx.mongodb.net/EasyPayDatabase?retryWrites=true&w=majority', {
   useNewUrlParser: true,
@@ -332,7 +332,7 @@ app.post('/api/auth/logout', (req, res) => {
   }
 });
 
-// Transaction history endpoint
+
 app.get('/api/transactions/history', authenticate, async (req, res) => {
   try {
     const transactions = await Transaction.find({ userId: req.user._id })
@@ -404,7 +404,7 @@ app.post('/api/transactions/send', authenticate, async (req, res) => {
       });
     }
 
-    // Find recipient
+  
     const recipient = await User.findOne({ email: recipientEmail }).session(session);
     if (!recipient) {
       await session.abortTransaction();
@@ -435,7 +435,7 @@ app.post('/api/transactions/send', authenticate, async (req, res) => {
       req.user.balance -= amountNum;
       recipient.balance += amountNum;
     } 
-    // Handle bank payment
+    
     else if (paymentMethod === 'bank') {
       if (!fromAccount) {
         await session.abortTransaction();
@@ -445,7 +445,7 @@ app.post('/api/transactions/send', authenticate, async (req, res) => {
         });
       }
 
-      // Find and update sender's bank account
+    
       const senderAccount = req.user.accounts.find(
         acc => acc.accountNumber === fromAccount
       );
@@ -518,13 +518,13 @@ app.get('/api/transactions/history', authenticate, async (req, res) => {
       .populate('sender', 'name email')
       .lean();
 
-    // Enhance transactions with proper display information
+   
     const enhancedTransactions = transactions.map(tx => {
       if (!tx.metadata) {
         tx.metadata = {};
       }
       
-      // For bill payments, ensure we have provider information
+    
       if (tx.type === 'bill' && !tx.metadata.billProvider) {
         const providerMatch = tx.description.match(/(.*) bill payment/);
         if (providerMatch) {
@@ -540,7 +540,7 @@ app.get('/api/transactions/history', authenticate, async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 });
-// In your backend (server.js)
+
 app.post('/api/wallet/topup', authenticate, async (req, res) => {
   try {
     const { amount, paymentMethod } = req.body;
@@ -552,7 +552,7 @@ app.post('/api/wallet/topup', authenticate, async (req, res) => {
       });
     }
 
-    // Update user balance
+    
     const user = await User.findByIdAndUpdate(
       req.user._id,
       { $inc: { balance: amount } },
@@ -609,11 +609,11 @@ app.post('/api/bills/pay', authenticate, async (req, res) => {
       throw new Error('Invalid amount');
     }
 
-    // 🔄 Re-fetch user inside session to avoid transaction mismatch
+    
     const user = await User.findById(req.user._id).session(session);
     if (!user) throw new Error('User not found');
 
-    // 💸 Handle wallet payment
+  
     if (paymentMethod === 'wallet') {
       if (user.balance < amountNum) {
         throw new Error('Insufficient wallet balance');
@@ -621,7 +621,7 @@ app.post('/api/bills/pay', authenticate, async (req, res) => {
       user.balance -= amountNum;
     }
 
-    // 🏦 Handle bank payment
+    
     else if (paymentMethod === 'bank') {
       if (!fromAccount) {
         throw new Error('Bank account required');
