@@ -18,8 +18,6 @@ app.use(cors({
 app.use(cookieParser());
 app.use(express.json()); // This replaces body-parser.json()
 
-// Database connection
-// mongoose.connect('mongodb+srv://dnyandagirish2004:dnyanda19@cluster0.ex5kjrv.mongodb.net/digital_wallet?retryWrites=true&w=majority', {
 mongoose.connect('mongodb+srv://sophiawavhal170404:sophi2025@cluster0.vlnnkjx.mongodb.net/EasyPayDatabase?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -72,8 +70,7 @@ const UserSchema = new mongoose.Schema({
   accounts: [{
     accountNumber: {
      type: String,
-    //   unique: true,
-    //   // required: true
+   
      },
     ifscCode: {
       type: String,
@@ -347,7 +344,7 @@ app.get('/api/transactions/history', authenticate, async (req, res) => {
   }
 });
 
-// User session endpoint
+
 app.get('/api/auth/me', authenticate, async (req, res) => {
   try {
     res.json({ 
@@ -562,7 +559,7 @@ app.post('/api/wallet/topup', authenticate, async (req, res) => {
       { new: true }
     );
 
-    // Create transaction record
+   
     const transaction = new Transaction({
       userId: req.user._id,
       amount: amount,
@@ -722,7 +719,7 @@ app.get('/api/user/notifications', authenticate, async (req, res) => {
   }
 });
 
-// Mark notification as read
+
 app.put('/api/user/notifications/:id/read', authenticate, async (req, res) => {
   try {
     const notification = await Notification.findOneAndUpdate(
@@ -788,7 +785,7 @@ app.get('/api/user/offers', authenticate, async (req, res) => {
   }
 });
 
-// Activate a specific offer
+
 app.post('/api/offers/:offerId/activate', authenticate, async (req, res) => {
   try {
     const offer = await Offer.findOne({
@@ -806,7 +803,7 @@ app.post('/api/offers/:offerId/activate', authenticate, async (req, res) => {
 
     const user = await User.findById(req.user._id);
 
-    // Ensure activatedOffers exists
+    
     if (!Array.isArray(user.activatedOffers)) {
       user.activatedOffers = [];
     }
@@ -933,7 +930,7 @@ app.post('/api/transactions/bank-transfer', authenticate, async (req, res) => {
       });
     }
 
-    // Update sender's balance using arrayFilters
+   
     await User.updateOne(
       { 
         _id: req.user._id,
@@ -948,7 +945,7 @@ app.post('/api/transactions/bank-transfer', authenticate, async (req, res) => {
       }
     );
 
-    // Find recipient and update balance
+    
     const recipientUpdate = await User.updateOne(
       { 'accounts.accountNumber': toAccount },
       { $inc: { 'accounts.$[account].balance': amountNum } },
@@ -966,7 +963,7 @@ app.post('/api/transactions/bank-transfer', authenticate, async (req, res) => {
       });
     }
 
-    // Get recipient details for transaction record
+    
     const recipient = await User.findOne({
       'accounts.accountNumber': toAccount
     }).session(session);
@@ -1002,7 +999,7 @@ app.post('/api/transactions/bank-transfer', authenticate, async (req, res) => {
       }
     });
 
-    // Create notifications one by one with session
+    
     const senderNotification = new Notification({
       userId: req.user._id,
       title: 'Transfer Sent',
@@ -1021,10 +1018,10 @@ app.post('/api/transactions/bank-transfer', authenticate, async (req, res) => {
     await senderNotification.save({ session });
     await recipientNotification.save({ session });
 
-    // Commit the transaction
+    
     await session.commitTransaction();
     
-    // Get updated sender balance
+    
     const updatedSender = await User.findById(req.user._id).session(session);
     const updatedAccount = updatedSender.accounts.find(acc => acc.accountNumber === fromAccount);
 
@@ -1136,7 +1133,7 @@ app.post('/api/user/add-account', authenticate, async (req, res) => {
       });
     }
 
-    // Add account to user
+    
     const updatedUser = await User.findByIdAndUpdate(
       req.user._id,
       {
@@ -1153,7 +1150,7 @@ app.post('/api/user/add-account', authenticate, async (req, res) => {
       { new: true, session }
     );
 
-    // Create transaction record
+    
     const transaction = new Transaction({
       userId: req.user._id,
       amount: parseFloat(balance),
@@ -1326,7 +1323,7 @@ const SplitSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
-// const Transaction = mongoose.model('Transaction', TransactionSchema);
+
 const Split = mongoose.model('Split', SplitSchema);
 
 // Updated Split Money Endpoint
@@ -1393,7 +1390,7 @@ app.post('/api/split-money', authenticate, async (req, res) => {
       transactionIds.push(transaction._id);
     }
 
-    // Update split with transaction references
+   
     split.transactions = transactionIds;
     await split.save({ session });
 
